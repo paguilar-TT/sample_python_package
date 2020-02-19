@@ -20,7 +20,7 @@ jobs:
         pip install -r calculator/requirements.txt
     - name: Lint with flake8
       run: |
-	flake8 . --statistics --count --show-source --output-file=calculator/results/flake8_style_check.log --tee -v
+        flake8 . --statistics --count --show-source --output-file=calculator/results/flake8_style_check.log --tee -v
     - name: Test with pytest
       run: |
         pytest calculator/tst/test_calculator.py -vs --html=calculator/results/test_calculator.html
