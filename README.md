@@ -12,3 +12,8 @@ The calculator has the following operations defined:
 ## CI Strategy
 The main idea is to create a workflow to deploy the package and run the unit tests to validate the build.
 As a stretch goal, we will attempt to add a code style check if time permits.
+The current CI implementation follows these steps:
+- Pull package
+- Install package dependencies
+- Test package using its included tst directory
+- Upload test results for analysis
