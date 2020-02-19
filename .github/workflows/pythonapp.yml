@@ -1,4 +1,4 @@
-name: Python application
+name: Deploy, style check, and test package
 
 on: [push]
 
