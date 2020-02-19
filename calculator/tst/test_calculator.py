@@ -23,6 +23,8 @@ logger.addHandler(stream_handler)
 
 log_file_path = os.path.join(
         config.RESULTS_PATH, "{0}.log".format(os.path.basename(__file__).split(".")[0]))
+f = open(log_file_path, "w+")
+f.close()
 file_handler = logging.FileHandler(log_file_path, "w")
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
