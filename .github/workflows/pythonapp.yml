@@ -1,17 +1,17 @@
 name: Deploy, Style Check, and Test
 
 env:
-  SRC: "calculator/src"
-  TST: "calculator/tst"
-  RESULTS: "calculator/results"
-  REQUIREMENTS: "calculator/requirements.txt"
-  CODE_STYLE: "code_style"
-  COVERAGE: "coverage"
-  TEST: "test"
+  SRC: calculator/src
+  TST: calculator/tst
+  RESULTS: calculator/results
+  REQUIREMENTS: calculator/requirements.txt
+  CODE_STYLE: code_style
+  COVERAGE: coverage
+  TEST: test
 
-  RESULTS_CODE_STYLE: "$RESULTS/$CODE_STYLE"
-  RESULTS_COVERAGE: "$RESULTS/$COVERAGE"
-  RESULTS_TEST: "$RESULTS/$TEST"
+  RESULTS_CODE_STYLE: $RESULTS/$CODE_STYLE
+  RESULTS_COVERAGE: $RESULTS/$COVERAGE
+  RESULTS_TEST: $RESULTS/$TEST
 on: [push]
 
 jobs:
