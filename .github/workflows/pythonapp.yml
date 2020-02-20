@@ -26,8 +26,8 @@ jobs:
     - name: Install dependencies
       run: |
         echo PIZZA!
-        echo $SRC
-        ls -la $TST
+        mkdir $SRC/pizza
+        ls -la $SRC
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
     - name: Lint with flake8
