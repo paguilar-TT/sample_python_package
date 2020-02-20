@@ -1,17 +1,18 @@
 name: Deploy, Style Check, and Test
 
 env:
-  SRC: calculator/src
-  TST: calculator/tst
-  RESULTS: calculator/results
-  REQUIREMENTS: calculator/requirements.txt
-  CODE_STYLE: code_style
-  COVERAGE: coverage
-  TEST: test
+  SRC: "calculator/src"
+  TST: "calculator/tst"
+  RESULTS: "calculator/results"
+  REQUIREMENTS: "calculator/requirements.txt"
+  CODE_STYLE: "code_style"
+  COVERAGE: "coverage"
+  TEST: "test"
 
-  RESULTS_CODE_STYLE: $RESULTS/$CODE_STYLE
+  RESULTS_CODE_STYLE: "$RESULTS/$CODE_STYLE"
   RESULTS_COVERAGE: $RESULTS/$COVERAGE
-  RESULTS_TEST: $RESULTS/$TEST
+  RESULTS_TEST: ${{ RESULTS }}/${{ TEST }}
+  
 on: [push]
 
 jobs:
@@ -27,12 +28,13 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
+        echo $SRC
+        ls -la $TST
+        echo $RESULTS_CODE_STYLE
+        echo $RESULTS_COVERAGE
+        echo RESULTS_TEST
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
-        mkdir $RESULTS
-        mkdir $RESULTS_CODE_STYLE
-        mkdir $RESULTS_COVERAGE
-        mkdir $RESULTS_TEST
         ls -laR .
     - name: Lint with flake8
       run: |
