@@ -3,7 +3,7 @@ name: Deploy, Style Check, and Test
 env:
   SRC: "calculator/src"
   TST: "calculator/tst"
-  RESULTS: "calculator/tst"
+  RESULTS: "calculator/results"
   REQUIREMENTS: "calculator/requirements.txt"
 
 on: [push]
