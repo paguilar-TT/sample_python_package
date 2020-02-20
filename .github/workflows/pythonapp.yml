@@ -1,5 +1,11 @@
 name: Deploy, Style Check, and Test
 
+env:
+  SRC: "calculator/src"
+  TST: "calculator/tst"
+  RESULTS: "calculator/tst"
+  REQUIREMENTS: "calculator/requirements.txt"
+
 on: [push]
 
 jobs:
@@ -15,20 +21,21 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        pwd
         python -m pip install --upgrade pip
-        pip install -r calculator/requirements.txt
+        pip install -r $REQUIREMENTS
     - name: Lint with flake8
       run: |
-        ls -la calculator
-        touch ./calculator/results/flake8_style_check.log
-        flake8 . --statistics --count --show-source --output-file=calculator/results/flake8_style_check.log --tee -v
+        mkdir $RESULTS
+        flake8 . --statistics --count --select=E9,F63,F7,F82 --show-source --output-file=$RESULTS/code_style/flake8_style_check.log --tee -v
+    - name: Code coverage check
+      run: |
+        pytest --cov=$SRC --cov-fail-under=70 --cov-report=html:$RESULTS/coverage
     - name: Test with pytest
       run: |
-        pytest calculator/tst/test_calculator.py -vs --html=calculator/results/test_calculator.html
+        pytest $TST/test_calculator.py -vs --html=$RESULTS/test/test_calculator.html
     - name: Upload artifact directory
       uses: actions/upload-artifact@v1.0.0
       with:
         name: test_results
-        path: calculator/results/
+        path: $RESULTS
 
