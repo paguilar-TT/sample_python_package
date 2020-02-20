@@ -5,9 +5,13 @@ env:
   TST: "calculator/tst"
   RESULTS: "calculator/results"
   REQUIREMENTS: "calculator/requirements.txt"
-  RESULTS_CODE_STYLE: "$RESULTS/code_style"
-  RESULTS_COVERAGE: "$RESULTS/coverage"
-  RESULTS_TEST: "$RESULTS/test"
+  CODE_STYLE: "code_style"
+  COVERAGE: "coverage"
+  TEST: "test"
+
+  RESULTS_CODE_STYLE: "$RESULTS/$CODE_STYLE"
+  RESULTS_COVERAGE: "$RESULTS/$COVERAGE"
+  RESULTS_TEST: "$RESULTS/$TEST"
 on: [push]
 
 jobs:
@@ -25,20 +29,19 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
+        mkdir $RESULTS
+        mkdir $RESULTS_CODE_STYLE
+        mkdir $RESULTS_COVERAGE
+        mkdir $RESULTS_TEST
+        ls -laR .
     - name: Lint with flake8
       run: |
-        mkdir -p $RESULTS_CODE_STYLE
-        ls -la calculator
         flake8 . --statistics --count --select=E9,F63,F7,F82 --show-source --output-file=$RESULTS_CODE_STYLE/flake8_style_check.log --tee -v
     - name: Code coverage check
       run: |
-        mkdir -p $RESULTS_COVERAGE
-        ls -la calculator
         pytest --cov=$SRC --cov-fail-under=70 --cov-report=html:$RESULTS_COVERAGE
     - name: Test with pytest
       run: |
-        mkdir -p $RESULTS_TEST
-        ls -la calculator
         pytest $TST/test_calculator.py -vs --html=$RESULTS_TEST/test_calculator.html
     - name: Upload artifact directory
       uses: actions/upload-artifact@v1.0.0
