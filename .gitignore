@@ -1,6 +1,9 @@
 *.pyc
-.pytest_cache
-__pycache__
+.pytest_cache/
+__pycache__/
 *.log
 *.html
 *,cover
+.DS_Store
+results/
+.coverage
