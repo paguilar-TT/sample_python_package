@@ -25,11 +25,15 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        echo PIZZA!
-        mkdir $SRC/pizza
-        ls -la $SRC
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
+    - name: Create artifact directories
+      run: |
+        mkdir $RESULTS
+        mkdir $RESULTS/$CODE_STYLE
+        mkdir $RESULTS/$COVERAGE
+        mkdir $RESULTS/$TEST
+        ls -l $RESULTS
     - name: Lint with flake8
       run: |
         flake8 . --statistics --count --select=E9,F63,F7,F82 --show-source --output-file=$RESULTS_CODE_STYLE/flake8_style_check.log --tee -v
