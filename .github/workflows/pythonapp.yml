@@ -47,7 +47,7 @@ jobs:
         path:  ${{ env.RESULTS }}/${{ env.CODE_STYLE }}
     - name: Test with pytest
       run: |
-        pytest $TST/test_calculator.py -vs --html=$RESULTS/$TEST_RESULTS/test_calculator.html
+        pytest $TST/test_calculator.py --verbose --capture=no --html=$RESULTS/$TEST_RESULTS/test_calculator.html
     - name: Upload Test Results Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
@@ -55,7 +55,7 @@ jobs:
         path:  ${{ env.RESULTS }}/${{ env.TEST_RESULTS }}
     - name: Code coverage check
       run: |
-        pytest --cov=$SRC --no-cov-on-fail --cov-fail-under=${{ env.MIN_COV_PERCENT }} --cov-report=html:$RESULTS/$CODE_COVERAGE
+        pytest --cov=$SRC --cov-fail-under=${{ env.MIN_COV_PERCENT }} --cov-report=html:$RESULTS/$CODE_COVERAGE
     - name: Upload Code Coverage Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
