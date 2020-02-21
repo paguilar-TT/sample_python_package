@@ -39,7 +39,7 @@ jobs:
         ls -l $RESULTS
     - name: Lint with flake8
       run: |
-        flake8 . --count --max-line-length $MAX_LINE_LENGTH --show-source --statistics --benchmark --select=E9,F63,F7,F82 --output-file=$RESULTS/$CODE_STYLE/flake8_style_check.log --tee
+        flake8 . --count --max-line-length $MAX_LINE_LENGTH --show-source --statistics --benchmark --output-file=$RESULTS/$CODE_STYLE/flake8_style_check.log --tee
     - name: Upload Lint With flake8 Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
