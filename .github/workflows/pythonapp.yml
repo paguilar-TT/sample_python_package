@@ -5,9 +5,6 @@ env:
   TST: calculator/tst
   RESULTS: calculator/results
   REQUIREMENTS: calculator/requirements.txt
-  CODE_STYLE: code_style
-  COVERAGE: coverage
-  TEST: test
   
 on: [push]
 
@@ -30,9 +27,9 @@ jobs:
     - name: Create artifact directories
       run: |
         mkdir $RESULTS
-        mkdir $RESULTS/$CODE_STYLE
-        mkdir $RESULTS/$COVERAGE
-        mkdir $RESULTS/$TEST
+        mkdir $RESULTS/code_style
+        mkdir $RESULTS/coverage
+        mkdir $RESULTS/test
         echo listing the directory $RESULTS
         ls -l $RESULTS
     - name: Lint with flake8
@@ -48,5 +45,5 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: test_results
-        path: $RESULTS
+        path:  ${{ env.RESULTS }}
 
