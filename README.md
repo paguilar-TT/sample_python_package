@@ -18,3 +18,4 @@ The current CI implementation follows these steps:
 - Test package using its included tst directory
 - Upload test results for analysis
 # This change comes from master
+# This change also comes from master
