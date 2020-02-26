@@ -17,7 +17,4 @@ The current CI implementation follows these steps:
 - Install package dependencies
 - Test package using its included tst directory
 - Upload test results for analysis
-# This was added on the FEATURE branch
-# This was also made on a new FEATURE branch
-# This was another edit on a new FEATURE branch to test difference between drafts and full pull requests
-# This was added on MASTER to create a merge conflict
+# This change comes from master
