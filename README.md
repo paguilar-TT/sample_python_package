@@ -19,3 +19,4 @@ The current CI implementation follows these steps:
 - Upload test results for analysis
 # This was added on the FEATURE branch
 # This was also made on a new FEATURE branch
+# This was another edit on a new FEATURE branch to test difference between drafts and full pull requests
