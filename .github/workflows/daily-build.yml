@@ -1,4 +1,4 @@
-name: Deploy, Style Check, and Test
+name: Daily Build
 
 env:
   SRC: calculator/src
@@ -13,7 +13,7 @@ env:
   
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '*/7 * * * *'
 
 jobs:
 
@@ -75,6 +75,6 @@ jobs:
       env: 
         ACTION_MAIL: "pablo.aguilar@toptal.com"
         ACTION_NAME: "Pablo Aguilar"
-        ACTION_BRANCH: "master"
+        ACTION_BRANCH: "test_data"
         ACTION_MESSAGE: "Appending data to test_file.txt"
       uses: ludeeus/action-push@0.0.1
