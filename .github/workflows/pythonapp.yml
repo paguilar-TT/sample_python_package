@@ -11,10 +11,7 @@ env:
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   
-on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '*/15 * * * *'
+on: push
 
 jobs:
 
@@ -69,12 +66,18 @@ jobs:
       with:
         name: all_results
         path:  ${{ env.RESULTS }}
+    - name: Move up a Directory
+      run: cd ..
+    - name: Checkout test_data
+      uses: actions/checkout@v2.0.0
+      with:
+        ref: paguilar-TT/sample_python_package/test_data
     - name: Git status
       run: git branch
-    - name: append_to_test_file
+    - name: Append to Test File
       run: |
         echo $(date) >> test_data.txt
-    - name: commit_to_branch
+    - name: Commit to Branch
       env: 
         ACTION_MAIL: "pablo.aguilar@toptal.com"
         ACTION_NAME: "Pablo Aguilar"
