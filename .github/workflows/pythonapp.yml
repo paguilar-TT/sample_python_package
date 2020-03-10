@@ -11,7 +11,10 @@ env:
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   
-on: push
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 * * * *'
 
 jobs:
 
