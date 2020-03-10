@@ -11,7 +11,10 @@ env:
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   
-on: [push]
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/15 * * * *'
 
 jobs:
 
@@ -66,9 +69,11 @@ jobs:
       with:
         name: all_results
         path:  ${{ env.RESULTS }}
+    - name: Git status
+      run: git branch
     - name: append_to_test_file
       run: |
-        echo date >> test_data.txt
+        echo $(date) >> test_data.txt
     - name: commit_to_branch
       env: 
         ACTION_MAIL: "pablo.aguilar@toptal.com"
