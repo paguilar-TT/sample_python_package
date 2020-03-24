@@ -112,7 +112,7 @@ jobs:
         git config --local user.email "pablo.aguilar@toptal.com"
         git config --local user.name "paguilar-TT"
         git status
-        git add results
+        git add results -f
         git status
         git commit -m "Add changes"
         
