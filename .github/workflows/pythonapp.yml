@@ -2,17 +2,15 @@ name: Deploy, Style Check, and Test
 
 env:
   MAIN_PACKAGE: python_package
-  TEST_PACKAGE: test_package
-  REPO_NAME: calculator
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   REQUIREMENTS: python_package/calculator/requirements.txt
-  RESULTS: python_package/calculator/results
+  RESULTS: results
   SRC: python_package/calculator/src
   TST: python_package/calculator/tst
-  CODE_STYLE: python_package/calculator/results/code_style
-  TEST_RESULTS: python_package/calculator/results/test_results
-  CODE_COVERAGE: python_package/calculator/results/code_coverage
+  CODE_STYLE: results/code_style
+  TEST_RESULTS: results/test_results
+  CODE_COVERAGE: results/code_coverage
 
 on:
   push:
@@ -38,11 +36,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: ${{ env.MAIN_PACKAGE }}
-        
-    - name: Dir
-      run: |
-        ls -l
-        
         
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
@@ -100,3 +93,13 @@ jobs:
         name: all_results
         path:  ${{ env.RESULTS }}
   
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACCESS_TOKEN }}
