@@ -96,7 +96,7 @@ jobs:
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
       with:
-        repository: sample_test_package
+        repository: paguilar-TT/sample_test_package
         
     - name: Move results back
       run: |
