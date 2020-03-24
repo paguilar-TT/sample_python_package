@@ -4,7 +4,7 @@ env:
   MAIN_PACKAGE: python_package
   TEST_PACKAGE: test_package
   REPO_NAME: calculator
-  RESULTS: ${{ MAIN_PACKAGE }}/${{ REPO_NAME }}/results
+  #RESULTS: ${{ MAIN_PACKAGE }}/${{ REPO_NAME }}/results
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   
