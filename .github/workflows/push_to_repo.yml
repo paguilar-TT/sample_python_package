@@ -92,6 +92,9 @@ jobs:
         ls -la
         mv $RESULTS ../
         ls -la
+        git config --local user.email "pablo.aguilar@toptal.com"
+        git config --local user.name "paguilar-TT"
+        git pull
         
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
@@ -109,8 +112,6 @@ jobs:
         ls -la
         git status
         git branch
-        git config --local user.email "pablo.aguilar@toptal.com"
-        git config --local user.name "paguilar-TT"
         git status
         git add results -f
         git status
