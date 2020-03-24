@@ -87,10 +87,16 @@ jobs:
         name: all_results
         path:  ${{ env.RESULTS }}
         
+    - name: Move results up a directory
+      run: mv $RESULTS ../
+        
     - name: Checkout sample_python_package metrics branch
       uses: actions/checkout@v2
       with:
         ref: metrics
+        
+    - name: Move results back
+      run: mv ../$RESULTS .
         
     - name: Commit
       run: |
