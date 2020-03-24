@@ -4,6 +4,8 @@ env:
   MAIN_PACKAGE: python_package
   TEST_PACKAGE: test_package
   REPO_NAME: calculator
+  MIN_COV_PERCENT: 70
+  MAX_LINE_LENGTH: 79
   
 on:
   push:
@@ -25,10 +27,6 @@ jobs:
         TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
         RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
         REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
-        CODE_STYLE: ${{ env.RESULTS }}/code_style
-
-        MIN_COV_PERCENT: 70
-        MAX_LINE_LENGTH: 79
           
     - name: Checkout sample_python_package
       uses: actions/checkout@v2
