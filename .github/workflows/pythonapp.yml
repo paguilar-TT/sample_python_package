@@ -103,6 +103,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git status
         git add -A
+        git reset HEAD ${{ env.MAIN_PACKAGE }}
         git status
         git commit -m "Add changes"
 
