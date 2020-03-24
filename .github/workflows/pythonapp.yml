@@ -4,10 +4,10 @@ env:
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
 
-  MAIN_PACKAGE: python_package
-  REQUIREMENTS: python_package/calculator/requirements.txt
-  SRC: python_package/calculator/src
-  TST: python_package/calculator/tst
+  MAIN_PACKAGE: ../python_package
+  REQUIREMENTS: ../python_package/calculator/requirements.txt
+  SRC: ../python_package/calculator/src
+  TST: ../python_package/calculator/tst
 
   RESULTS: results
   CODE_STYLE: results/code_style
