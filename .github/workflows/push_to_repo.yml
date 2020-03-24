@@ -96,6 +96,7 @@ jobs:
         git config --local user.name "paguilar-TT"
         git checkout master
         git reset --hard origin/master
+        ls -la
         
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
@@ -116,6 +117,7 @@ jobs:
         git status
         git branch
         git status
+        git pull
         git add results -f
         git status
         git commit -m "Add changes"
