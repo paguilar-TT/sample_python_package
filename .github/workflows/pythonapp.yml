@@ -36,11 +36,13 @@ jobs:
         repository: paguilar-TT/sample_test_package
         path: test_package
 
-    - name: Append to Test File
+    - name: Directory Nav Test
       run: |
         pwd
         ls -la
-        cd
+        cd python_package
+        pwd
+        ls -la
         
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
@@ -106,7 +108,9 @@ jobs:
       run: |
         pwd
         ls -la
-        cd
+        cd ../test_package
+        pwd
+        ls -la
         #echo $(date) >> test_data.txt
         
     - name: Commit to Branch
