@@ -101,16 +101,11 @@ jobs:
       run: |
         cd ${{ env.TEST_PACKAGE }}
         git branch
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "pablo.aguilar@toptal.com"
+        git config --local user.name "paguilar-TT"
+        git config --local user.password ${{ secrets.ACCESS_TOKEN }}
         git status
         git add -A
         git status
         git commit -m "Add changes"
-        
-    - name: Push
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.ACCESS_TOKEN }}
-        directory: ${{ env.TEST_PACKAGE }}
-        force: true
+        git push
