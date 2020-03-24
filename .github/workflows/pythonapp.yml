@@ -1,17 +1,18 @@
 name: Deploy, Style Check, and Test
 
 env:
-  MAIN_PACKAGE: python_package
-  TEST_PACKAGE: test_package
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
+
+  MAIN_PACKAGE: python_package
   REQUIREMENTS: python_package/calculator/requirements.txt
-  RESULTS: test_package/results
   SRC: python_package/calculator/src
   TST: python_package/calculator/tst
-  CODE_STYLE: test_package/results/code_style
-  TEST_RESULTS: test_package/results/test_results
-  CODE_COVERAGE: test_package/results/code_coverage
+
+  RESULTS: results
+  CODE_STYLE: results/code_style
+  TEST_RESULTS: results/test_results
+  CODE_COVERAGE: results/code_coverage
 
 on:
   push:
@@ -32,7 +33,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: paguilar-TT/sample_test_package
-        path: ${{ env.TEST_PACKAGE }}
         
     - name: Checkout sample_python_package
       uses: actions/checkout@v2
@@ -109,6 +109,5 @@ jobs:
       env: 
         ACTION_MAIL: "pablo.aguilar@toptal.com"
         ACTION_NAME: "Pablo Aguilar"
-        ACTION_BRANCH: "test_data"
         ACTION_MESSAGE: "Appending data"
       uses: ludeeus/action-push@0.0.1
