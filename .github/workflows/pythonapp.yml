@@ -26,9 +26,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
-
-
+  
     steps:
         
     - name: Checkout sample_python_package
@@ -55,7 +53,6 @@ jobs:
         
     - name: Create artifact directories
       run: |
-        cd $MAIN_PACKAGE
         mkdir $RESULTS
         mkdir $RESULTS/$CODE_STYLE
         mkdir $RESULTS/$CODE_COVERAGE
