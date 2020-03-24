@@ -110,6 +110,8 @@ jobs:
     - name: Commit
       run: |
         ls -la
+        git config --local user.email "pablo.aguilar@toptal.com"
+        git config --local user.name "paguilar-TT"
         git status
         git branch
         git status
