@@ -54,9 +54,9 @@ jobs:
     - name: Create artifact directories
       run: |
         mkdir $RESULTS
-        mkdir $RESULTS/$CODE_STYLE
-        mkdir $RESULTS/$CODE_COVERAGE
-        mkdir $RESULTS/$TEST_RESULTS
+        mkdir $CODE_STYLE
+        mkdir $CODE_COVERAGE
+        mkdir $TEST_RESULTS
         echo listing the directory $RESULTS
         ls -l $RESULTS
         
@@ -82,7 +82,7 @@ jobs:
       
     - name: Code coverage check
       run: |
-        pytest --cov=$SRC --cov-fail-under=${{ env.MIN_COV_PERCENT }} --cov-report=html:$CODE_COVERAGE
+        pytest --cov=$SRC --cov-fail-under=$MIN_COV_PERCENT --cov-report=html:$CODE_COVERAGE
         
     - name: Upload Code Coverage Artifact
       uses: actions/upload-artifact@v1.0.0
