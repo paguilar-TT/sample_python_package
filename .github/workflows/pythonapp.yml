@@ -95,7 +95,7 @@ jobs:
         name: all_results
         path:  ${{ env.RESULTS }}
   
-    - name: Commit files
+    - name: Commit
       run: |
         cd $TEST_PACKAGE
         git config --local user.email "action@github.com"
@@ -104,4 +104,11 @@ jobs:
         git add -A
         git status
         git commit -m "Add changes"
-        git push
+
+    - name: Push
+      env: 
+        ACTION_MAIL: "pablo.aguilar@toptal.com"
+        ACTION_NAME: "Pablo Aguilar"
+        ACTION_BRANCH: "test_data"
+        ACTION_MESSAGE: "Appending data"
+      uses: ludeeus/action-push@0.0.1
