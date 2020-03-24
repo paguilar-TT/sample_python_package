@@ -28,17 +28,21 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-        
-    - name: Checkout sample_python_package
-      uses: actions/checkout@v2
-      with:
-        path: ${{ env.MAIN_PACKAGE }}
 
     - name: Checkout sample_test_package
       uses: actions/checkout@v2
       with:
         repository: paguilar-TT/sample_test_package
-        path: ${{ env.TEST_PACKAGE }}
+        
+    - name: Checkout sample_python_package
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.MAIN_PACKAGE }}
+        
+    - name: Dir
+      run: |
+        ls -l
+        
         
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
