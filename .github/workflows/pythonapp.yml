@@ -104,6 +104,7 @@ jobs:
         git status
         git add -A
         git reset HEAD ${{ env.MAIN_PACKAGE }}
+        git rm --cached python_package
         git status
         git commit -m "Add changes"
 
@@ -113,5 +114,4 @@ jobs:
         ACTION_NAME: "Pablo Aguilar"
         ACTION_MESSAGE: "Appending data"
       uses: ludeeus/action-push@0.0.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        #GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
