@@ -94,7 +94,8 @@ jobs:
         ls -la
         git config --local user.email "pablo.aguilar@toptal.com"
         git config --local user.name "paguilar-TT"
-        git pull
+        git checkout master
+        git reset --hard origin/master
         
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
