@@ -111,5 +111,6 @@ jobs:
         ACTION_MAIL: "pablo.aguilar@toptal.com"
         ACTION_NAME: "Pablo Aguilar"
         ACTION_MESSAGE: "Appending data"
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       uses: ludeeus/action-push@0.0.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
