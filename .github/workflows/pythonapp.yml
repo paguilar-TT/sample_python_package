@@ -99,6 +99,10 @@ jobs:
         git config --local user.name "GitHub Action"
         git status
         git add -A
+        git stash
+        git pull
+        git stash pop
+        git add -A
         git status
         git commit -m "Add changes"
         
