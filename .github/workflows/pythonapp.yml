@@ -46,6 +46,11 @@ jobs:
       with:
         python-version: 3.7
         
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+        
     - name: Install dependencies
       env:
         REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
