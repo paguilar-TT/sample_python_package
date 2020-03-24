@@ -4,6 +4,7 @@ env:
   MAIN_PACKAGE: python_package
   TEST_PACKAGE: test_package
   REPO_NAME: calculator
+  RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
   
@@ -47,7 +48,6 @@ jobs:
         
     - name: Install dependencies
       env:
-        RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
         REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
       run: |
         python -m pip install --upgrade pip
