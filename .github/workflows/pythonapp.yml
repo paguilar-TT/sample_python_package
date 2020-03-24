@@ -4,14 +4,14 @@ env:
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
 
-  REQUIREMENTS: python_sample_package/calculator/requirements.txt
-  SRC: python_sample_package/calculator/src
-  TST: python_sample_package/calculator/tst
+  REQUIREMENTS: calculator/requirements.txt
+  SRC: calculator/src
+  TST: calculator/tst
 
-  RESULTS: python_sample_package/results
-  CODE_STYLE: python_sample_package/results/code_style
-  TEST_RESULTS: python_sample_package/results/test_results
-  CODE_COVERAGE: python_sample_package/results/code_coverage
+  RESULTS: results
+  CODE_STYLE: results/code_style
+  TEST_RESULTS: results/test_results
+  CODE_COVERAGE: results/code_coverage
 
 on:
   push:
