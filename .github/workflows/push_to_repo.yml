@@ -92,11 +92,11 @@ jobs:
         ls -la
         mv $RESULTS ../
         ls -la
-        git config --local user.email "pablo.aguilar@toptal.com"
-        git config --local user.name "paguilar-TT"
-        git checkout master
-        git reset --hard origin/master
-        ls -la
+        cd ../
+        rm -rf sample_python_package
+        mkdir sample_test_package
+        cd sample_test_package
+        pwd
         
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
@@ -115,9 +115,6 @@ jobs:
         git config --local user.email "pablo.aguilar@toptal.com"
         git config --local user.name "paguilar-TT"
         git status
-        git branch
-        git status
-        git pull
         git add results -f
         git status
         git commit -m "Add changes"
