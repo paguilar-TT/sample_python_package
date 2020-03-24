@@ -30,8 +30,6 @@ jobs:
 
     - name: Checkout sample_test_package
       uses: actions/checkout@v2
-      with:
-        repository: paguilar-TT/sample_test_package
         
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
