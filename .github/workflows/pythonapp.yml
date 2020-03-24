@@ -97,7 +97,7 @@ jobs:
   
     - name: Commit
       run: |
-        cd $TEST_PACKAGE
+        ls -l
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git status
