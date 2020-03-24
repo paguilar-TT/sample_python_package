@@ -107,11 +107,6 @@ jobs:
         git add -A
         git status
         git commit -m "Add changes"
+        git push
 
-    - name: Push
-      env: 
-        ACTION_MAIL: "pablo.aguilar@toptal.com"
-        ACTION_NAME: "Pablo Aguilar"
-        ACTION_MESSAGE: "Appending data"
-      uses: ludeeus/action-push@0.0.1
         #GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
