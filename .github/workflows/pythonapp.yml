@@ -88,7 +88,10 @@ jobs:
         path:  ${{ env.RESULTS }}
         
     - name: Move results up a directory
-      run: mv $RESULTS ../
+      run: |
+        ls -la
+        mv $RESULTS ../
+        ls -la
         
     - name: Checkout sample_python_package metrics branch
       uses: actions/checkout@v2
@@ -96,10 +99,14 @@ jobs:
         ref: metrics
         
     - name: Move results back
-      run: mv ../$RESULTS .
+      run: |
+        ls -la
+        mv ../$RESULTS .
+        ls -la
         
     - name: Commit
       run: |
+        git status
         git branch
         git config --local user.email "pablo.aguilar@toptal.com"
         git config --local user.name "paguilar-TT"
