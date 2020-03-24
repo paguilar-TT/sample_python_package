@@ -108,5 +108,8 @@ jobs:
         git status
         git commit -m "Add changes"
         git push
-
-        #GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    - name: Push
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACCESS_TOKEN }}
+        directory: ${{ env.TEST_PACKAGE }}
