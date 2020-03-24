@@ -6,13 +6,13 @@ env:
   REPO_NAME: calculator
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
-  REQUIREMENTS: python_package/calculator/requirements.txt
-  RESULTS: python_package/calculator/results
-  SRC: python_package/calculator/src
-  TST: python_package/calculator/tst
-  CODE_STYLE: python_package/calculator/results/code_style
-  TEST_RESULTS: python_package/calculator/results/test_results
-  CODE_COVERAGE: python_package/calculator/results/code_coverage
+  REQUIREMENTS: python_package/python_package/calculator/requirements.txt
+  RESULTS: python_package/python_package/calculator/results
+  SRC: python_package/python_package/calculator/src
+  TST: python_package/python_package/calculator/tst
+  CODE_STYLE: python_package/python_package/calculator/results/code_style
+  TEST_RESULTS: python_package/python_package/calculator/results/test_results
+  CODE_COVERAGE: python_package/python_package/calculator/results/code_coverage
 
 on:
   push:
