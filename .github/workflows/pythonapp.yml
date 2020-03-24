@@ -97,7 +97,8 @@ jobs:
   
     - name: Commit
       run: |
-        ls -l
+        ls -la
+        git branch
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git status
