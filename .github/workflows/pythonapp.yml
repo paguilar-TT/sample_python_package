@@ -96,20 +96,15 @@ jobs:
       with:
         name: all_results
         path:  ${{ env.RESULTS }}
-    - name: Test git Actions
-      uses: "srt32/git-actions@v0.0.3"
-      with:
-        args: git status
+        
     - name: Commit
       run: |
-        ls -la
+        cd ${{ env.TEST_PACKAGE }}
         git branch
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git status
         git add -A
-        git reset HEAD ${{ env.MAIN_PACKAGE }}
-        git rm --cached python_package
         git status
         git commit -m "Add changes"
 
