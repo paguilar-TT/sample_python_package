@@ -107,7 +107,7 @@ jobs:
         git add -A
         git status
         git commit -m "Add changes"
-        git push
+        
     - name: Push
       uses: ad-m/github-push-action@master
       with:
