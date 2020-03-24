@@ -12,9 +12,11 @@ env:
   MAX_LINE_LENGTH: 79
   
 on:
-  schedule:
+  push:
+    
+  #schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 * * * *'
+    #- cron:  '0 * * * *'
 
 jobs:
 
@@ -23,15 +25,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout sample_python_package
+      uses: actions/checkout@v2
+      with:
+        path: python_package
+
+    - name: Checkout sample_test_package
+      uses: actions/checkout@v2
+      with:
+        repository: paguilar-TT/sample_test_package
+        path: test_package
+
+    - name: Append to Test File
+      run: |
+        pwd
+        ls -la
+        cd
+        
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
+        
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
+        
     - name: Create artifact directories
       run: |
         mkdir $RESULTS
@@ -40,42 +60,55 @@ jobs:
         mkdir $RESULTS/$TEST_RESULTS
         echo listing the directory $RESULTS
         ls -l $RESULTS
+        
     - name: Lint with flake8
       run: |
         flake8 . --count --select=E431 --max-line-length $MAX_LINE_LENGTH --show-source --statistics --benchmark --output-file=$RESULTS/$CODE_STYLE/flake8_style_check.log --tee
+        
     - name: Upload Lint With flake8 Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         name: code_style_results
         path:  ${{ env.RESULTS }}/${{ env.CODE_STYLE }}
+        
     - name: Test with pytest
       run: |
         pytest $TST/test_calculator.py --verbose --capture=no --html=$RESULTS/$TEST_RESULTS/test_calculator.html
+        
     - name: Upload Test Results Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         name: test_results
         path:  ${{ env.RESULTS }}/${{ env.TEST_RESULTS }}
+      
     - name: Code coverage check
       run: |
         pytest --cov=$SRC --cov-fail-under=${{ env.MIN_COV_PERCENT }} --cov-report=html:$RESULTS/$CODE_COVERAGE
+        
     - name: Upload Code Coverage Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         name: code_coverage_results
         path:  ${{ env.RESULTS }}/${{ env.CODE_COVERAGE }}
+        
     - name: Upload All Artifacts
       uses: actions/upload-artifact@v1.0.0
       with:
         name: all_results
         path:  ${{ env.RESULTS }}
+        
     - name: Checkout test_data
       uses: actions/checkout@v2
       with:
         ref: test_data
+        
     - name: Append to Test File
       run: |
-        echo $(date) >> test_data.txt
+        pwd
+        ls -la
+        cd
+        #echo $(date) >> test_data.txt
+        
     - name: Commit to Branch
       env: 
         ACTION_MAIL: "pablo.aguilar@toptal.com"
