@@ -20,14 +20,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Set Environment Variables
-      env:
-        SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
-        TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
-        RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
-        REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
-          
+    steps:          
     - name: Checkout sample_python_package
       uses: actions/checkout@v2
       with:
@@ -53,6 +46,8 @@ jobs:
         python-version: 3.7
         
     - name: Install dependencies
+      env:
+        RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
       run: |
         cd $MAIN_PACKAGE
         python -m pip install --upgrade pip
@@ -60,6 +55,9 @@ jobs:
         
     - name: Create artifact directories
       env:
+        SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
+        TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
+        REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
         CODE_STYLE: ${{ env.RESULTS }}/code_style
         CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
         TEST_RESULTS: ${{ env.RESULTS }}/test_results
