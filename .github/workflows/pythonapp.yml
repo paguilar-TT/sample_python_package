@@ -106,12 +106,13 @@ jobs:
         
     - name: Commit
       run: |
+        ls -la
         git status
         git branch
         git config --local user.email "pablo.aguilar@toptal.com"
         git config --local user.name "paguilar-TT"
         git status
-        git add -A
+        git add results
         git status
         git commit -m "Add changes"
         
