@@ -4,10 +4,9 @@ env:
   MAIN_PACKAGE: python_package
   TEST_PACKAGE: test_package
   REPO_NAME: calculator
-  #RESULTS: ${{ MAIN_PACKAGE }}/${{ REPO_NAME }}/results
   MIN_COV_PERCENT: 70
   MAX_LINE_LENGTH: 79
-  
+
 on:
   push:
     
@@ -16,12 +15,19 @@ on:
     #- cron:  '0 * * * *'
 
 jobs:
-
+    
   build:
 
     runs-on: ubuntu-latest
+    
+    env:
+      REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
+      RESULTS: ${{ MAIN_PACKAGE }}/${{ REPO_NAME }}/results
+      SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
+      TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
 
-    steps:          
+    steps:
+        
     - name: Checkout sample_python_package
       uses: actions/checkout@v2
       with:
@@ -32,39 +38,18 @@ jobs:
       with:
         repository: paguilar-TT/sample_test_package
         path: ${{ env.TEST_PACKAGE }}
-
-    - name: Directory Nav Test
-      run: |
-        pwd
-        ls -la
-        cd python_package
-        pwd
-        ls -la
         
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
         
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
-        
     - name: Install dependencies
-      env:
-        REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
       run: |
         python -m pip install --upgrade pip
         pip install -r $REQUIREMENTS
         
     - name: Create artifact directories
-      env:
-        SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
-        TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
-        CODE_STYLE: ${{ env.RESULTS }}/code_style
-        CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
-        TEST_RESULTS: ${{ env.RESULTS }}/test_results
       run: |
         cd $MAIN_PACKAGE
         mkdir $RESULTS
@@ -81,26 +66,36 @@ jobs:
         flake8 . --count --select=E431 --max-line-length $MAX_LINE_LENGTH --show-source --statistics --benchmark --output-file=$CODE_STYLE/flake8_style_check.log --tee
         
     - name: Upload Lint With flake8 Artifact
+      env:
+        CODE_STYLE: ${{ env.RESULTS }}/code_style
       uses: actions/upload-artifact@v1.0.0
       with:
         name: code_style_results
         path: ${{ env.CODE_STYLE }}
         
     - name: Test with pytest
+      env:
+        TEST_RESULTS: ${{ env.RESULTS }}/test_results
       run: |
         pytest $TST/test_calculator.py --verbose --capture=no --html=$TEST_RESULTS/test_calculator.html
         
     - name: Upload Test Results Artifact
+      env:
+        TEST_RESULTS: ${{ env.RESULTS }}/test_results
       uses: actions/upload-artifact@v1.0.0
       with:
         name: test_results
         path: ${{ env.TEST_RESULTS }}
       
     - name: Code coverage check
+      env:
+        CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
       run: |
         pytest --cov=$SRC --cov-fail-under=${{ env.MIN_COV_PERCENT }} --cov-report=html:$CODE_COVERAGE
         
     - name: Upload Code Coverage Artifact
+      env:
+        CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
       uses: actions/upload-artifact@v1.0.0
       with:
         name: code_coverage_results
