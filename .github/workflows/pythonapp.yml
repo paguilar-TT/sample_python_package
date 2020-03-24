@@ -4,15 +4,6 @@ env:
   MAIN_PACKAGE: python_package
   TEST_PACKAGE: test_package
   REPO_NAME: calculator
-  SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
-  TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
-  RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
-  REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
-  CODE_STYLE: ${{ env.RESULTS }}/code_style
-  CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
-  TEST_RESULTS: ${{ env.RESULTS }}/test_results
-  MIN_COV_PERCENT: 70
-  MAX_LINE_LENGTH: 79
   
 on:
   push:
@@ -28,6 +19,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set Environment Variables
+      env:
+        SRC: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/src
+        TST: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/tst
+        RESULTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/results
+        REQUIREMENTS: ${{ env.MAIN_PACKAGE }}/${{ env.REPO_NAME }}/requirements.txt
+        CODE_STYLE: ${{ env.RESULTS }}/code_style
+
+        MIN_COV_PERCENT: 70
+        MAX_LINE_LENGTH: 79
+          
     - name: Checkout sample_python_package
       uses: actions/checkout@v2
       with:
@@ -59,6 +61,10 @@ jobs:
         pip install -r $REQUIREMENTS
         
     - name: Create artifact directories
+      env:
+        CODE_STYLE: ${{ env.RESULTS }}/code_style
+        CODE_COVERAGE: ${{ env.RESULTS }}/code_coverage
+        TEST_RESULTS: ${{ env.RESULTS }}/test_results
       run: |
         cd $MAIN_PACKAGE
         mkdir $RESULTS
@@ -69,6 +75,8 @@ jobs:
         ls -l $RESULTS
         
     - name: Lint with flake8
+      env:
+        CODE_STYLE: ${{ env.RESULTS }}/code_style
       run: |
         flake8 . --count --select=E431 --max-line-length $MAX_LINE_LENGTH --show-source --statistics --benchmark --output-file=$CODE_STYLE/flake8_style_check.log --tee
         
