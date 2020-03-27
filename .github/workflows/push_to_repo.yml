@@ -107,7 +107,7 @@ jobs:
     - name: Move results back
       run: |
         ls -la
-        mv ../$RESULTS ./
+        mv -f ../$RESULTS ./
         ls -la
         
     - name: Commit
