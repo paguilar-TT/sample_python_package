@@ -2,7 +2,7 @@ variables:
   RESULTS: results
   CALCULATOR: calculator
   MAX_LINE_LENGTH: 127
-  CODE_STYLE: code_style
+  CODE_STYLE: $(RESULTS)/code_style
 
 trigger:
 - master
@@ -30,7 +30,7 @@ stages:
 
     - bash: |
         pwd
-        mkdir -p $(RESULTS)
+        mkdir -p $(CODE_STYLE)
       displayName: 'Make results directory'
 
     - script: |
