@@ -92,10 +92,6 @@ jobs:
         ls -la
         mv $RESULTS ../
         ls -la
-        cd ../
-        rm -rf sample_python_package
-        mkdir sample_test_package
-        cd sample_test_package
         pwd
         
     - name: Checkout sample_test_package repo
