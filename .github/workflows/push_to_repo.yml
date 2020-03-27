@@ -101,13 +101,13 @@ jobs:
     - name: Checkout sample_test_package repo
       uses: actions/checkout@v2
       with:
-        repository: paguilar-TT/sample_python_package@metrics
-        #ref: metrics
+        repository: paguilar-TT/sample_python_package
+        ref: metrics
         
     - name: Move results back
       run: |
         ls -la
-        mv ../$RESULTS .
+        mv ../$RESULTS ./
         ls -la
         
     - name: Commit
