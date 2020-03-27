@@ -1,4 +1,5 @@
 variables:
+  RESULTS: results
   CALCULATOR: calculator
   MAX_LINE_LENGTH: 127
   CODE_STYLE: code_style
@@ -26,6 +27,11 @@ stages:
         python -m pip install --upgrade pip
         pip install -r $(CALCULATOR)/requirements.txt
       displayName: 'Install dependencies'
+
+    - bash: |
+        pwd
+        mkdir -p $(RESULTS)
+      displayName: 'Make results directory'
 
     - script: |
         flake8 . --count --select=E431 --max-line-length $(MAX_LINE_LENGTH) --show-source --statistics --benchmark --output-file=$(CODE_STYLE)/flake8_style_check.log --tee
