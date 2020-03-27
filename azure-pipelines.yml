@@ -36,3 +36,7 @@ stages:
     - script: |
         flake8 . --count --select=E431 --max-line-length $(MAX_LINE_LENGTH) --show-source --statistics --benchmark --output-file=$(CODE_STYLE)/flake8_style_check.log --tee
       displayName: 'Flake8 style check'
+
+    - publish: $(CODE_STYLE)
+      artifact: Flake8
+      displayName: 'Publish artifact'
