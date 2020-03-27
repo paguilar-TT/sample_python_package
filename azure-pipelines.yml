@@ -1,36 +1,32 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+variables:
+  CALCULATOR: calculator
+  MAX_LINE_LENGTH: 127
+  CODE_STYLE: code_style
 
 trigger:
 - master
 
 pool:
   vmImage: 'ubuntu-latest'
-strategy:
-  matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+stages:
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r calculator/requirements.txt
-  displayName: 'Install dependencies'
+- stage:
+  jobs:
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+  - job:
+    steps:
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.6'
+      displayName: Use Python 3.6
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r $(CALCULATOR)/requirements.txt
+      displayName: 'Install dependencies'
+
+    - script: |
+        flake8 . --count --select=E431 --max-line-length $(MAX_LINE_LENGTH) --show-source --statistics --benchmark --output-file=$(CODE_STYLE)/flake8_style_check.log --tee
+      displayName: 'Flake8 style check'
